@@ -131,22 +131,51 @@
         }),
       ];
 
-      const renderData = () => {
+      const renderData = (editIdx) => {
         let htmlResult = "";
         data.forEach((val, idx) => {
+          if (idx == editIdx) {
+            htmlResult += `
+            <tr>
+              <td>${idx + 1}</td>
+              <td><input id="editFullName" value ="${
+                val.firstName + " " + val.lastName
+              }"></td>
+              <td><input id="editEmail" value="${val.email}"></td>
+              <td><input id="editAge" value="${val.age}"></td>
+              <td><select id="editOccupation">
+                  <option ${
+                    val.occupation == "Software Developer" ? "selected" : ""
+                  }>Software Developer</option>
+                  <option ${
+                    val.occupation == "Digital Marketer" ? "selected" : ""
+                  }>Digital Marketer</option>
+                  <option ${
+                    val.occupation == "UI/UX" ? "selected" : ""
+                  }>UI/UX</option>
+                  <option ${
+                    val.occupation == "Data Scientist" ? "selected" : ""
+                  }>Data Scientist</option>
+                <select></td>
+              <td><button>Save</button></td>
+              <td><button>Cancel</button></td>
+            </tr>
+            `;
+          } else {
+            htmlResult += `
+            <tr>
+              <td>${idx + 1}</td>
+              <td>${val.firstName + " " + val.lastName}</td>
+              <td>${val.email}</td>
+              <td>${val.age}</td>
+              <td>${val.occupation}</td>
+              <td><button>Edit</button></td>
+              <td><button onclick="deleteData(${idx})">Delete</button></td>
+            </tr>
+            `;
+          }
           // ini buat show datanya didalam table employee database
           // yg dimasukan kedalam html result itu tag" html isinya row
-          htmlResult += ` 
-          <tr>
-            <td>${idx + 1}</td>
-            <td>${val.firstName + " " + val.lastName}</td>
-            <td>${val.email}</td>
-            <td>${val.age}</td>
-            <td>${val.occupation}</td>
-            <td><button>Edit</button></td>
-            <td><button onclick="deleteData(${idx})">Delete</button></td>
-          </tr>
-          `;
         });
         document.getElementById("tableDataEmployee").innerHTML = htmlResult;
       };
