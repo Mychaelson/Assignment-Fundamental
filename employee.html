@@ -42,7 +42,7 @@
       </select>
       <br />
       <br />
-      <button>Create Data</button>
+      <button onclick="addData()">Create Data</button>
     </fieldset>
 
     <br />
@@ -147,6 +147,31 @@
           `;
         });
         document.getElementById("tableDataEmployee").innerHTML = htmlResult;
+      };
+
+      const addData = () => {
+        let firstNameInput = document.getElementById("fname").value;
+        let lastNameInput = document.getElementById("lname").value;
+        let emailInput = document.getElementById("email").value;
+        let ageInput = document.getElementById("age").value;
+        let occupationInput = document.getElementById("occupation").value;
+
+        const newEmployee = new Employee({
+          firstName: firstNameInput,
+          lastName: lastNameInput,
+          email: emailInput,
+          age: ageInput,
+          occupation: occupationInput,
+        });
+
+        data.push(newEmployee);
+
+        renderData();
+
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("age").value = "";
       };
 
       renderData();
