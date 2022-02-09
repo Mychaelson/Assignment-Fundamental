@@ -113,8 +113,7 @@
     <script>
       class Employee {
         constructor({ firstName, lastName, email, age, occupation }) {
-          this.firstName = firstName;
-          this.lastName = lastName;
+          this.fullName = firstName + " " + lastName;
           this.email = email;
           this.age = age;
           this.occupation = occupation;
@@ -138,9 +137,7 @@
             htmlResult += `
             <tr>
               <td>${idx + 1}</td>
-              <td><input id="editFullName" value ="${
-                val.firstName + " " + val.lastName
-              }"></td>
+              <td><input id="editFullName" value ="${val.fullName}"></td>
               <td><input id="editEmail" value="${val.email}"></td>
               <td><input id="editAge" value="${val.age}"></td>
               <td><select id="editOccupation">
@@ -157,7 +154,7 @@
                     val.occupation == "Data Scientist" ? "selected" : ""
                   }>Data Scientist</option>
                 <select></td>
-              <td><button>Save</button></td>
+              <td><button onclick="saveEditData(${idx})">Save</button></td>
               <td><button>Cancel</button></td>
             </tr>
             `;
@@ -165,11 +162,11 @@
             htmlResult += `
             <tr>
               <td>${idx + 1}</td>
-              <td>${val.firstName + " " + val.lastName}</td>
+              <td>${val.fullName}</td>
               <td>${val.email}</td>
               <td>${val.age}</td>
               <td>${val.occupation}</td>
-              <td><button>Edit</button></td>
+              <td><button onclick="renderData(${idx})">Edit</button></td>
               <td><button onclick="deleteData(${idx})">Delete</button></td>
             </tr>
             `;
@@ -214,6 +211,20 @@
           data.splice(deleteIdx, 1);
           renderData();
         }
+      };
+
+      const saveEditData = (editIdx) => {
+        let fullNameInput = document.getElementById("editFullName").value;
+        let emailInput = document.getElementById("editEmail").value;
+        let ageInput = document.getElementById("editAge").value;
+        let occupationInput = document.getElementById("editOccupation").value;
+
+        data[editIdx].fullName = fullNameInput;
+        data[editIdx].email = emailInput;
+        data[editIdx].age = ageInput;
+        data[editIdx].occupation = occupationInput;
+
+        renderData();
       };
     </script>
   </body>
