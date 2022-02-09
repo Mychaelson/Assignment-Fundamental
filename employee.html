@@ -123,8 +123,8 @@
 
       let data = [
         new Employee({
-          firstName: "john",
-          lastName: "doe",
+          firstName: "John",
+          lastName: "Doe",
           email: "johndoe@gmail.com",
           age: 30,
           occupation: "UI/UX",
@@ -134,20 +134,25 @@
       const renderData = () => {
         let htmlResult = "";
         data.forEach((val, idx) => {
+          // ini buat show datanya didalam table employee database
+          // yg dimasukan kedalam html result itu tag" html isinya row
           htmlResult += ` 
           <tr>
             <td>${idx + 1}</td>
-            <td>${val.firstName + val.lastName}</td>
+            <td>${val.firstName + " " + val.lastName}</td>
             <td>${val.email}</td>
             <td>${val.age}</td>
             <td>${val.occupation}</td>
             <td><button>Edit</button></td>
-            <td><button>Delete</button></td>
+            <td><button onclick="deleteData(${idx})">Delete</button></td>
           </tr>
           `;
         });
         document.getElementById("tableDataEmployee").innerHTML = htmlResult;
       };
+
+      // ini buat manggil function render data untuk pertama kalinya
+      renderData();
 
       const addData = () => {
         let firstNameInput = document.getElementById("fname").value;
@@ -174,7 +179,13 @@
         document.getElementById("age").value = "";
       };
 
-      renderData();
+      const deleteData = (deleteIdx) => {
+        let shouldDelete = confirm("Yakin mau delete data employee ini?");
+        if (shouldDelete) {
+          data.splice(deleteIdx, 1);
+          renderData();
+        }
+      };
     </script>
   </body>
 </html>
