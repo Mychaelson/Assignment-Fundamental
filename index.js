@@ -46,5 +46,3 @@ let findData = duplicateFind(sortedAge, (val) => {
   return val > 20;
 });
 console.log(findData);
-
-// age.find();
