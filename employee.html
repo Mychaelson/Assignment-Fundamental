@@ -112,7 +112,7 @@
         }
       }
 
-      let data = [
+      let employeeDataBase = [
         new Employee({
           firstName: "John",
           lastName: "Doe",
@@ -124,7 +124,7 @@
 
       const renderData = (editIdx) => {
         let htmlResult = "";
-        data.forEach((val, idx) => {
+        employeeDataBase.forEach((val, idx) => {
           if (idx == editIdx) {
             htmlResult += `
             <tr>
@@ -198,7 +198,7 @@
           occupation: occupationInput,
         });
 
-        data.push(newEmployee);
+        employeeDataBase.push(newEmployee);
 
         renderData();
 
@@ -211,7 +211,7 @@
       const deleteData = (deleteIdx) => {
         let shouldDelete = confirm("Yakin mau delete data employee ini?");
         if (shouldDelete) {
-          data.splice(deleteIdx, 1);
+          employeeDataBase.splice(deleteIdx, 1);
           renderData();
         }
       };
@@ -222,10 +222,10 @@
         let ageInput = document.getElementById("editAge").value;
         let occupationInput = document.getElementById("editOccupation").value;
 
-        data[editIdx].fullName = fullNameInput;
-        data[editIdx].email = emailInput;
-        data[editIdx].age = ageInput;
-        data[editIdx].occupation = occupationInput;
+        employeeDataBase[editIdx].fullName = fullNameInput;
+        employeeDataBase[editIdx].email = emailInput;
+        employeeDataBase[editIdx].age = ageInput;
+        employeeDataBase[editIdx].occupation = occupationInput;
 
         renderData();
       };
@@ -237,7 +237,7 @@
         let employeeOccupationSearch =
           document.getElementById("searchOccupation").value;
         let htmlSearchResult = "";
-        data.forEach((val, idx) => {
+        employeeDataBase.forEach((val, idx) => {
           if (
             val.fullName
               .toLowerCase()
