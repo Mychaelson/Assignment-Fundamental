@@ -319,6 +319,21 @@
 
         renderData(sortedEmployeeName);
       };
+
+      const sortEmployeeAge = () => {
+        let orderOfSort = document.getElementById("sortOrder").value;
+        let sortedEmployeeAge = [];
+        if (orderOfSort == "ascending") {
+          sortedEmployeeAge = cloneEmployeeDataBase.sort((a, b) => {
+            return a.age - b.age;
+          });
+        } else if (orderOfSort == "descending") {
+          sortedEmployeeAge = cloneEmployeeDataBase.sort((a, b) => {
+            return b.age - a.age;
+          });
+        }
+        renderData(sortedEmployeeAge);
+      };
     </script>
   </body>
 </html>
