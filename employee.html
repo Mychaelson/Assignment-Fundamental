@@ -46,6 +46,27 @@
     </fieldset>
 
     <br />
+    <fieldset>
+      <legend>Search Employee</legend>
+      <label for="searchName">Employee Name:</label>
+      <input type="text" id="searchName" name="fname" />
+      <br />
+      <br />
+      <label for="searchOccupation">Occupation</label>
+      <select id="searchOccupation">
+        <option value="">All Occupations</option>
+        <option>Software Developer</option>
+        <option>UI/UX</option>
+        <option>Digital Marketer</option>
+        <option>Data Scientist</option>
+      </select>
+      <br />
+      <br />
+      <button onclick="searchEmployee()">Search Employee</button>
+    </fieldset>
+
+    <br />
+    <br />
 
     <table>
       <caption>
@@ -65,28 +86,7 @@
       <tbody id="tableDataEmployee"></tbody>
     </table>
 
-    <br />
-    <br />
-
-    <fieldset>
-      <legend>Search Employee</legend>
-      <label for="searchName">Employee Name:</label>
-      <input type="text" id="searchName" name="fname" />
-      <br />
-      <br />
-      <label for="searchOccupation">Occupation</label>
-      <select id="searchOccupation">
-        <option value="">All Occupations</option>
-        <option>Software Developer</option>
-        <option>UI/UX</option>
-        <option>Digital Marketer</option>
-        <option>Data Scientist</option>
-      </select>
-      <br />
-      <br />
-      <button onclick="searchEmployee()">Search Employee</button>
-    </fieldset>
-    <table>
+    <!-- <table>
       <caption>
         Search Results
       </caption>
@@ -100,7 +100,7 @@
         </tr>
       </thead>
       <tbody id="dataSearchResult"></tbody>
-    </table>
+    </table> -->
 
     <script>
       class Employee {
@@ -122,9 +122,9 @@
         }),
       ];
 
-      const renderData = (editIdx) => {
+      const renderData = (data = [], editIdx) => {
         let htmlResult = "";
-        employeeDataBase.forEach((val, idx) => {
+        data.forEach((val, idx) => {
           if (idx == editIdx) {
             htmlResult += `
             <tr>
@@ -158,11 +158,16 @@
               <td>${val.email}</td>
               <td>${val.age}</td>
               <td>${val.occupation}</td>
-              <td><button onclick="renderData(${idx})">Edit</button></td>
-              <td><button onclick="deleteData(${idx})">Delete</button></td>
-            </tr>
-            `;
+              </tr>
+              `;
+            // <td><button onclick="renderData('${employeeDataBase}', ${idx})">Edit</button></td>
+            // <td><button onclick="deleteData(${idx})">Delete</button></td>
+
+            // yg diatas ngk pake dlu karena bermasalah
           }
+
+          // masih bermasalah di edit pas masukin renderdata di edit button
+
           // ini buat show datanya didalam table employee database
           // yg dimasukan kedalam html result itu tag" html isinya row
         });
@@ -170,7 +175,7 @@
       };
 
       // ini buat manggil function render data untuk pertama kalinya
-      renderData();
+      renderData(employeeDataBase);
 
       const addData = () => {
         let firstNameInput = document.getElementById("fname").value;
@@ -200,7 +205,7 @@
 
         employeeDataBase.push(newEmployee);
 
-        renderData();
+        renderData(employeeDataBase);
 
         document.getElementById("fname").value = "";
         document.getElementById("lname").value = "";
@@ -212,7 +217,7 @@
         let shouldDelete = confirm("Yakin mau delete data employee ini?");
         if (shouldDelete) {
           employeeDataBase.splice(deleteIdx, 1);
-          renderData();
+          renderData(employeeDataBase);
         }
       };
 
@@ -227,7 +232,7 @@
         employeeDataBase[editIdx].age = ageInput;
         employeeDataBase[editIdx].occupation = occupationInput;
 
-        renderData();
+        renderData(employeeDataBase);
       };
 
       // ------------- search employee data ----------------
@@ -236,28 +241,41 @@
         let employeeNameSearch = document.getElementById("searchName").value;
         let employeeOccupationSearch =
           document.getElementById("searchOccupation").value;
-        let htmlSearchResult = "";
-        employeeDataBase.forEach((val, idx) => {
-          if (
+        let filteredEmployee = [];
+
+        filteredEmployee = employeeDataBase.filter((val, idx) => {
+          return (
             val.fullName
               .toLowerCase()
               .includes(employeeNameSearch.toLowerCase()) &&
             val.occupation.includes(employeeOccupationSearch)
-          ) {
-            htmlSearchResult += `
-              <tr>
-                <td>${idx + 1}</td>
-                <td>${val.fullName}</td>
-                <td>${val.email}</td>
-                <td>${val.age}</td>
-                <td>${val.occupation}</td>
-              </tr>`;
-          }
+          );
         });
 
+        renderData(filteredEmployee);
+
+        // let htmlSearchResult = "";
+        // employeeDataBase.forEach((val, idx) => {
+        //   if (
+        //     val.fullName
+        //       .toLowerCase()
+        //       .includes(employeeNameSearch.toLowerCase()) &&
+        //     val.occupation.includes(employeeOccupationSearch)
+        //   ) {
+        //     htmlSearchResult += `
+        //       <tr>
+        //         <td>${idx + 1}</td>
+        //         <td>${val.fullName}</td>
+        //         <td>${val.email}</td>
+        //         <td>${val.age}</td>
+        //         <td>${val.occupation}</td>
+        //       </tr>`;
+        //   }
+        // });
+
         // console.log(htmlSearchResult);
-        document.getElementById("dataSearchResult").innerHTML =
-          htmlSearchResult;
+        // document.getElementById("dataSearchResult").innerHTML =
+        //   htmlSearchResult;
       };
     </script>
   </body>
