@@ -1,13 +1,11 @@
-const buah = ["apel", "mangga", "jeruk", "semangka", "jambu", "melon"];
-
-// -----------------------------------------------------
-
 // duplikasi method .indexOf()
 
 // mencari index dari sebuah item di array
 // akan return sebuah number (index)
 
-const indexOf = (arr, input) => {
+const buah = ["apel", "mangga", "jeruk", "semangka", "jambu", "melon"];
+
+const duplicateIndexOf = (arr, input) => {
   for (let i = 0; i < buah.length; i++) {
     if (buah[i] == input) {
       return i;
@@ -15,7 +13,7 @@ const indexOf = (arr, input) => {
   }
 };
 
-console.log(indexOf(buah, "melon"));
+console.log(duplicateIndexOf(buah, "melon"));
 
 // ------------------------------------------------------
 
@@ -27,3 +25,26 @@ console.log(indexOf(buah, "melon"));
 // 2. Callback function kita harus return boolean
 // 3. Ketika callback function return true, loop akan berhenti
 //    lalu function find akan return item dari array.
+
+const age = [20, 10, 15, 22, 24, 28];
+let sortedAge = age.sort((a, b) => {
+  return a - b;
+});
+
+const duplicateFind = (array, callback) => {
+  let result = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i], i, array)) {
+      result = array[i];
+      break;
+    }
+  }
+  return result;
+};
+
+let findData = duplicateFind(sortedAge, (val) => {
+  return val > 20;
+});
+console.log(findData);
+
+// age.find();
