@@ -106,77 +106,50 @@
 
       renderData();
 
-      const itemChosen = (itemNumber) => {
+      const quantityItemChosen = (itemNumber) => {
+        let quantityInCart = 0;
         if (itemNumber == 1) {
-          let quantityInCart =
-            document.getElementById("quantityItem1").innerHTML;
-          let stock = document.getElementById("stockItem1").innerHTML;
-          quantityInCart = parseInt(quantityInCart);
-          stock = parseInt(stock);
-          return quantityInCart;
+          quantityInCart = document.getElementById("quantityItem1").innerHTML;
         } else if (itemNumber == 2) {
-          let quantityInCart =
-            document.getElementById("quantityItem2").innerHTML;
-          let stock = document.getElementById("stockItem2").innerHTML;
-          quantityInCart = parseInt(quantityInCart);
-          stock = parseInt(stock);
-          return quantityInCart;
+          quantityInCart = document.getElementById("quantityItem2").innerHTML;
         }
+        quantityInCart = parseInt(quantityInCart);
+        return quantityInCart;
+      };
+
+      const stockItemChosen = (itemNumber) => {
+        let stockItemChosen = 0;
+        if (itemNumber == 1) {
+          stockItemChosen = document.getElementById("stockItem1").innerHTML;
+        } else if (itemNumber == 2) {
+          stockItemChosen = document.getElementById("stockItem2").innerHTML;
+        }
+        stockItemChosen = parseInt(stockItemChosen);
+        return stockItemChosen;
       };
 
       const minOneitem = (itemNumber) => {
-        if (itemNumber == 1) {
-          let quantityInCart = itemChosen(1);
-          if (quantityInCart == 0) {
-            alert("tidak ada item di cart");
-            return;
-          } else if (quantityInCart > 0) {
-            baju[itemNumber - 1].quantity -= 1;
-            renderData();
-            return;
-          }
-
-          // TODO: add minus the cart
-        } else if (itemNumber == 2) {
-          let quantityInCart = itemChosen(2);
-          if (quantityInCart == 0) {
-            alert("tidak ada item di cart");
-            return;
-          } else if (quantityInCart > 0) {
-            baju[itemNumber - 1].quantity -= 1;
-            renderData();
-            return;
-          }
-
-          // TODO: add minus the cart
+        let quantityInCart = quantityItemChosen(itemNumber);
+        if (quantityInCart == 0) {
+          alert("tidak ada item di cart");
+          return;
+        } else if (quantityInCart > 0) {
+          baju[itemNumber - 1].quantity -= 1;
+          renderData();
+          return;
         }
       };
 
       const addOneItem = (itemNumber) => {
-        if (itemNumber == 1) {
-          let quantityInCart = itemChosen(1);
-          let stock = document.getElementById("stockItem1").innerHTML;
-          stock = parseInt(stock);
-          if (quantityInCart >= stock) {
-            alert("stock tidak mencukupi");
-            return;
-          } else if (quantityInCart < stock) {
-            baju[itemNumber - 1].quantity += 1;
-            renderData();
-            return;
-          }
-        } else if (itemNumber == 2) {
-          let quantityInCart = itemChosen(2);
-          let stock = document.getElementById("stockItem2").innerHTML;
-          stock = parseInt(stock);
-          if (quantityInCart >= stock) {
-            alert("stock tidak mencukupi");
-            return;
-          } else if (quantityInCart < stock) {
-            baju[itemNumber - 1].quantity += 1;
-            renderData();
-            return;
-          }
+        let quantityInCart = quantityItemChosen(itemNumber);
+        let stock = stockItemChosen(itemNumber);
+        if (quantityInCart >= stock) {
+          alert("stock tidak mencukupi");
+          return;
+        } else if (quantityInCart < stock) {
+          baju[itemNumber - 1].quantity += 1;
+          renderData();
+          return;
         }
       };
 
@@ -185,6 +158,7 @@
         let totalCart = 0;
         for (let i = 0; i < baju.length; i++) {
           totalCart += baju[i].showTotalPrice();
+          baju[i].stock -= baju[i].quantity;
           baju[i].quantity = 0;
         }
         renderData();
