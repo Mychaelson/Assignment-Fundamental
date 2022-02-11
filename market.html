@@ -102,13 +102,27 @@
 
       renderData();
 
-      const minOneitem = (itemNumber) => {
+      const itemChosen = (itemNumber) => {
         if (itemNumber == 1) {
           let quantityInCart =
             document.getElementById("quantityItem1").innerHTML;
           let stock = document.getElementById("stockItem1").innerHTML;
           quantityInCart = parseInt(quantityInCart);
           stock = parseInt(stock);
+          return quantityInCart;
+        } else if (itemNumber == 2) {
+          let quantityInCart =
+            document.getElementById("quantityItem2").innerHTML;
+          let stock = document.getElementById("stockItem2").innerHTML;
+          quantityInCart = parseInt(quantityInCart);
+          stock = parseInt(stock);
+          return quantityInCart;
+        }
+      };
+
+      const minOneitem = (itemNumber) => {
+        if (itemNumber == 1) {
+          let quantityInCart = itemChosen(1);
           if (quantityInCart == 0) {
             alert("tidak ada item di cart");
             return;
@@ -120,11 +134,7 @@
 
           // TODO: add minus the cart
         } else if (itemNumber == 2) {
-          let quantityInCart =
-            document.getElementById("quantityItem2").innerHTML;
-          let stock = document.getElementById("stockItem2").innerHTML;
-          quantityInCart = parseInt(quantityInCart);
-          stock = parseInt(stock);
+          let quantityInCart = itemChosen(2);
           if (quantityInCart == 0) {
             alert("tidak ada item di cart");
             return;
@@ -140,10 +150,8 @@
 
       const addOneItem = (itemNumber) => {
         if (itemNumber == 1) {
-          let quantityInCart =
-            document.getElementById("quantityItem1").innerHTML;
+          let quantityInCart = itemChosen(1);
           let stock = document.getElementById("stockItem1").innerHTML;
-          quantityInCart = parseInt(quantityInCart);
           stock = parseInt(stock);
           if (quantityInCart >= stock) {
             alert("stock tidak mencukupi");
@@ -154,10 +162,8 @@
             return;
           }
         } else if (itemNumber == 2) {
-          let quantityInCart =
-            document.getElementById("quantityItem2").innerHTML;
+          let quantityInCart = itemChosen(2);
           let stock = document.getElementById("stockItem2").innerHTML;
-          quantityInCart = parseInt(quantityInCart);
           stock = parseInt(stock);
           if (quantityInCart >= stock) {
             alert("stock tidak mencukupi");
