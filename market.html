@@ -64,13 +64,13 @@
         new Product(
           "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/5c15e2ef8fb43bd25a9aacea6b33dc2d758807ea_xxl-1.jpg",
           "Linen Jersey Top",
-          "479900",
+          479900,
           15
         ),
         new Product(
           "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/e915de4d3d289579a5feeabfaa0fa31e2bb8b9f4_xxl-1.jpg",
           "T-Shirt Relaxed Fit",
-          "199900",
+          199900,
           12
         ),
       ];
@@ -92,24 +92,24 @@
             <td>Rp. ${val.price.toLocaleString()}</td>
             <td id="stockItem${idx + 1}">${val.stock}</td>
             <td id="quantityItem${idx + 1}">${val.quantity}</td>
-            <td>
-              <button
-                class="btn btn-secondary"
-                id="minusItemOne"
-                onclick="minOneitem(${idx + 1})"
-              >
-                -
-              </button>
-            </td>
-            <td>
-              <button
-                onclick="addOneItem(${idx + 1})"
-                class="btn btn-secondary"
-                id="plusItemOne"
-              >
-                +
-              </button>
-            </td>
+            <div class="btn-group"> 
+              <td>
+                <button
+                  class="btn btn-secondary"
+                  id="minusItemOne"
+                  onclick="minOneitem(${idx + 1})"
+                >
+                  -
+                </button>
+                <button
+                  onclick="addOneItem(${idx + 1})"
+                  class="btn btn-secondary"
+                  id="plusItemOne"
+                >
+                  +
+                </button>
+              </td>
+            <div>
           </tr>
           `;
         });
