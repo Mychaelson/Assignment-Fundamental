@@ -11,6 +11,7 @@ const duplicateIndexOf = (arr, input) => {
       return i;
     }
   }
+  return -1;
 };
 
 console.log(duplicateIndexOf(buah, "melon"));
