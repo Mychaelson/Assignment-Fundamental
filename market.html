@@ -74,8 +74,8 @@
             </td>
             <td>${val.productName}</td>
             <td>${val.price}</td>
-            <td id="stockItemOne">${val.stock}</td>
-            <td id="quantityItemOne">${val.quantity}</td>
+            <td id="stockItem${idx + 1}">${val.stock}</td>
+            <td id="quantityItem${idx + 1}">${val.quantity}</td>
             <td>
               <button
                 class="btn btn-secondary"
@@ -101,6 +101,74 @@
       };
 
       renderData();
+
+      const minOneitem = (itemNumber) => {
+        if (itemNumber == 1) {
+          let quantityInCart =
+            document.getElementById("quantityItem1").innerHTML;
+          let stock = document.getElementById("stockItem1").innerHTML;
+          quantityInCart = parseInt(quantityInCart);
+          stock = parseInt(stock);
+          if (quantityInCart == 0) {
+            alert("tidak ada item di cart");
+            return;
+          } else if (quantityInCart > 0) {
+            baju[itemNumber - 1].quantity -= 1;
+            renderData();
+            return;
+          }
+
+          // TODO: add minus the cart
+        } else if (itemNumber == 2) {
+          let quantityInCart =
+            document.getElementById("quantityItem2").innerHTML;
+          let stock = document.getElementById("stockItem2").innerHTML;
+          quantityInCart = parseInt(quantityInCart);
+          stock = parseInt(stock);
+          if (quantityInCart == 0) {
+            alert("tidak ada item di cart");
+            return;
+          } else if (quantityInCart > 0) {
+            baju[itemNumber - 1].quantity -= 1;
+            renderData();
+            return;
+          }
+
+          // TODO: add minus the cart
+        }
+      };
+
+      const addOneItem = (itemNumber) => {
+        if (itemNumber == 1) {
+          let quantityInCart =
+            document.getElementById("quantityItem1").innerHTML;
+          let stock = document.getElementById("stockItem1").innerHTML;
+          quantityInCart = parseInt(quantityInCart);
+          stock = parseInt(stock);
+          if (quantityInCart >= stock) {
+            alert("stock tidak mencukupi");
+            return;
+          } else if (quantityInCart < stock) {
+            baju[itemNumber - 1].quantity += 1;
+            renderData();
+            return;
+          }
+        } else if (itemNumber == 2) {
+          let quantityInCart =
+            document.getElementById("quantityItem2").innerHTML;
+          let stock = document.getElementById("stockItem2").innerHTML;
+          quantityInCart = parseInt(quantityInCart);
+          stock = parseInt(stock);
+          if (quantityInCart >= stock) {
+            alert("stock tidak mencukupi");
+            return;
+          } else if (quantityInCart < stock) {
+            baju[itemNumber - 1].quantity += 1;
+            renderData();
+            return;
+          }
+        }
+      };
     </script>
   </body>
 </html>
