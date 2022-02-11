@@ -61,6 +61,18 @@
           549900,
           10
         ),
+        new Product(
+          "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/5c15e2ef8fb43bd25a9aacea6b33dc2d758807ea_xxl-1.jpg",
+          "Linen Jersey Top",
+          "479900",
+          15
+        ),
+        new Product(
+          "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/e915de4d3d289579a5feeabfaa0fa31e2bb8b9f4_xxl-1.jpg",
+          "T-Shirt Relaxed Fit",
+          "199900",
+          12
+        ),
       ];
 
       console.log(baju);
@@ -106,30 +118,8 @@
 
       renderData();
 
-      const quantityItemChosen = (itemNumber) => {
-        let quantityInCart = 0;
-        if (itemNumber == 1) {
-          quantityInCart = document.getElementById("quantityItem1").innerHTML;
-        } else if (itemNumber == 2) {
-          quantityInCart = document.getElementById("quantityItem2").innerHTML;
-        }
-        quantityInCart = parseInt(quantityInCart);
-        return quantityInCart;
-      };
-
-      const stockItemChosen = (itemNumber) => {
-        let stockItemChosen = 0;
-        if (itemNumber == 1) {
-          stockItemChosen = document.getElementById("stockItem1").innerHTML;
-        } else if (itemNumber == 2) {
-          stockItemChosen = document.getElementById("stockItem2").innerHTML;
-        }
-        stockItemChosen = parseInt(stockItemChosen);
-        return stockItemChosen;
-      };
-
       const minOneitem = (itemNumber) => {
-        let quantityInCart = quantityItemChosen(itemNumber);
+        let quantityInCart = baju[itemNumber - 1].quantity;
         if (quantityInCart == 0) {
           alert("tidak ada item di cart");
           return;
@@ -141,8 +131,8 @@
       };
 
       const addOneItem = (itemNumber) => {
-        let quantityInCart = quantityItemChosen(itemNumber);
-        let stock = stockItemChosen(itemNumber);
+        let quantityInCart = baju[itemNumber - 1].quantity;
+        let stock = baju[itemNumber - 1].stock;
         if (quantityInCart >= stock) {
           alert("stock tidak mencukupi");
           return;
