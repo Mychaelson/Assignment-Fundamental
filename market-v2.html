@@ -197,15 +197,33 @@
 
       const startTimer = () => {
         // ini timer, tinggal diganti waktunya aja
-        let timer = 15;
+        let seconds = 15;
+        let minutes = 0;
+        seconds = parseInt(seconds);
+        minutes = parseInt(minutes);
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
         decrement = setInterval(() => {
-          timer--;
+          seconds--;
+          if (seconds < 10) {
+            seconds = "0" + seconds;
+          }
+
+          if (seconds == 0 && minutes > 0) {
+            minutes--;
+            seconds = 60;
+
+            if (minutes < 10) {
+              minutes = "0" + minutes;
+            }
+          }
           document.getElementById(
             "timer"
-          ).innerHTML = `Waktu CheckOut anda: ${timer} detik`;
+          ).innerHTML = `Waktu CheckOut anda ${minutes}:${seconds}`;
 
           // jika pembayaran tidak dilakukan, semua bakal dikosongin, tpi stock tidak dipotong
-          if (timer == 0) {
+          if (seconds == 0 && minutes == 0) {
             clearCheckOut();
           }
         }, 1000);
