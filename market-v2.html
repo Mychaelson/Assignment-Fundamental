@@ -159,6 +159,7 @@
       };
 
       const checkOut = () => {
+        // panggil timernya
         startTimer();
         let totalCart = totalPrice();
 
@@ -179,13 +180,15 @@
       let decrement;
 
       const startTimer = () => {
+        // ini timer, tinggal diganti waktunya aja
         let timer = 10;
         decrement = setInterval(() => {
           timer--;
           document.getElementById(
             "timer"
-          ).innerHTML = `Waktu CheckOut anda: ${timer} `;
+          ).innerHTML = `Waktu CheckOut anda: ${timer} detik`;
 
+          // jika pembayaran tidak dilakukan, semua bakal dikosongin, tpi stock tidak dipotong
           if (timer == 0) {
             clearInterval(decrement);
             alert("Waktu CheckOut anda sudah habis");
@@ -216,6 +219,7 @@
           return;
         }
 
+        // ini bakal stop interval timernya dan clear semuanya termasuk pengurangan stock dan pengosongan cart
         clearInterval(decrement);
         document.getElementById("timer").innerHTML = "";
         document.getElementById("showTotal").innerHTML = "";
@@ -226,8 +230,6 @@
         });
         renderData();
       };
-
-      // when CHECKOUT, tunjukin 3 hal, total price, input beserta tombol, dan timer
     </script>
   </body>
 </html>
