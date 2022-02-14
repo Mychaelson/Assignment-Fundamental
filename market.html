@@ -90,8 +90,8 @@
             </td>
             <td>${val.productName}</td>
             <td>Rp. ${val.price.toLocaleString()}</td>
-            <td id="stockItem${idx + 1}">${val.stock}</td>
-            <td id="quantityItem${idx + 1}">${val.quantity}</td>
+            <td>${val.stock}</td>
+            <td>${val.quantity}</td>
             <div class="btn-group"> 
               <td colspan ="2">
                 <button
@@ -124,7 +124,7 @@
           alert("tidak ada item di cart");
           return;
         } else if (quantityInCart > 0) {
-          baju[itemNumber - 1].quantity -= 1;
+          baju[itemNumber - 1].quantity--;
           renderData();
           return;
         }
@@ -137,7 +137,7 @@
           alert("stock tidak mencukupi");
           return;
         } else if (quantityInCart < stock) {
-          baju[itemNumber - 1].quantity += 1;
+          baju[itemNumber - 1].quantity++;
           renderData();
           return;
         }
