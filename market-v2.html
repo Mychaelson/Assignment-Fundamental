@@ -179,6 +179,22 @@
 
       let decrement;
 
+      const clearCheckOut = (isPay) => {
+        clearInterval(decrement);
+        document.getElementById("timer").innerHTML = "";
+        document.getElementById("showTotal").innerHTML = "";
+        document.getElementById("input").innerHTML = "";
+
+        if (isPay) {
+          baju.forEach((val, idx) => {
+            val.checkOut();
+          });
+          renderData();
+          return;
+        }
+        alert("Waktu CheckOut anda sudah habis");
+      };
+
       const startTimer = () => {
         // ini timer, tinggal diganti waktunya aja
         let timer = 15;
@@ -190,11 +206,7 @@
 
           // jika pembayaran tidak dilakukan, semua bakal dikosongin, tpi stock tidak dipotong
           if (timer == 0) {
-            clearInterval(decrement);
-            alert("Waktu CheckOut anda sudah habis");
-            document.getElementById("timer").innerHTML = "";
-            document.getElementById("showTotal").innerHTML = "";
-            document.getElementById("input").innerHTML = "";
+            clearCheckOut();
           }
         }, 1000);
       };
@@ -220,15 +232,7 @@
           return;
         }
         // ini bakal stop interval timernya dan clear semuanya termasuk pengurangan stock dan pengosongan cart
-        clearInterval(decrement);
-        document.getElementById("timer").innerHTML = "";
-        document.getElementById("showTotal").innerHTML = "";
-        document.getElementById("input").innerHTML = "";
-
-        baju.forEach((val, idx) => {
-          val.checkOut();
-        });
-        renderData();
+        clearCheckOut(true);
       };
     </script>
   </body>
