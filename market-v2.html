@@ -181,7 +181,7 @@
 
       const startTimer = () => {
         // ini timer, tinggal diganti waktunya aja
-        let timer = 10;
+        let timer = 15;
         decrement = setInterval(() => {
           timer--;
           document.getElementById(
@@ -206,19 +206,19 @@
           alert(
             `Kembalian anda sebesar Rp.${(
               jumlahPembayaran - totalPrice()
-            ).toLocaleString()} `
+            ).toLocaleString()} \nTerima Kasih!`
           );
         } else if (jumlahPembayaran == totalPrice()) {
           alert("Terima Kasih");
         } else if (jumlahPembayaran < totalPrice()) {
           alert(
             `Uang anda Kurang sebanyak Rp. ${(
-              jumlahPembayaran - totalPrice()
+              totalPrice() - jumlahPembayaran
             ).toLocaleString()}`
           );
+          document.getElementById("jumlahUang").value = "";
           return;
         }
-
         // ini bakal stop interval timernya dan clear semuanya termasuk pengurangan stock dan pengosongan cart
         clearInterval(decrement);
         document.getElementById("timer").innerHTML = "";
