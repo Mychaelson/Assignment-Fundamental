@@ -159,17 +159,11 @@
       };
 
       const checkOut = () => {
-        let totalQuantity = 0;
-        baju.forEach((val) => {
-          if (val.quantity != 0) {
-            totalQuantity++;
-          }
-        });
+        let totalCart = totalPrice();
 
-        if (totalQuantity > 0) {
+        if (totalCart) {
           // panggil timernya
           startTimer();
-          let totalCart = totalPrice();
 
           let htmlShowTotal = `Total Belanja anda: Rp. `;
 
