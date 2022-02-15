@@ -159,22 +159,33 @@
       };
 
       const checkOut = () => {
-        // panggil timernya
-        startTimer();
-        let totalCart = totalPrice();
+        let totalQuantity = 0;
+        baju.forEach((val) => {
+          if (val.quantity != 0) {
+            totalQuantity++;
+          }
+        });
 
-        let htmlShowTotal = `Total Belanja anda: Rp. `;
+        if (totalQuantity > 0) {
+          // panggil timernya
+          startTimer();
+          let totalCart = totalPrice();
 
-        htmlShowTotal += totalCart.toLocaleString();
+          let htmlShowTotal = `Total Belanja anda: Rp. `;
 
-        document.getElementById("showTotal").innerHTML = htmlShowTotal;
+          htmlShowTotal += totalCart.toLocaleString();
 
-        document.getElementById("input").innerHTML = `
+          document.getElementById("showTotal").innerHTML = htmlShowTotal;
+
+          document.getElementById("input").innerHTML = `
         <label for="jumlahUang">Jumlah Uang:</label>
         <input type="number" class="form-control" id="jumlahUang">
         <br>
         <button class="btn btn-primary" onclick="thankYou()">Pay</button>
         `;
+        } else {
+          alert("Belum ada item diCart");
+        }
       };
 
       let decrement;
